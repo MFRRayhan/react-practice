@@ -1,0 +1,50 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --color-brand: #245b59;
+  --color-brand-light: #e5efeb;
+  --color-page: #f3f6f3;
+  --color-ink: #243b3b;
+  --color-muted: #788b87;
+  --color-success-soft: #e0eee5;
+  --color-danger-soft: #f5e7e2;
+}
+
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  color: #243b3b;
+  background: #f3f6f3;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button {
+  cursor: pointer;
+}
+
+.btn {
+  @apply rounded-xl normal-case font-semibold transition-all duration-200;
+}
+
+.quiz-card {
+  @apply rounded-3xl border border-[#e0e9e3] bg-white shadow-sm;
+}
+
+.answer {
+  @apply border-[#245b59] bg-[#e5efeb] text-[#245b59];
+}
+
+.correct {
+  @apply border-[#b6d7c0] bg-[#e0eee5] text-[#28623f];
+}
+
+.wrong {
+  @apply border-[#ecd0c5] bg-[#f5e7e2] text-[#a34c39];
+}

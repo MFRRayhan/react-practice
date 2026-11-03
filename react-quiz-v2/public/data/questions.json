@@ -1,0 +1,120 @@
+{
+  "questions": [
+    {
+      "question": "Which is the most popular javascript framework?",
+      "options": ["Angular", "React", "Vue", "Svelte"],
+      "correctOption": 1,
+      "points": 10
+    },
+
+    {
+      "question": "Which keyword is used to declare a variable that cannot be reassigned?",
+      "options": ["var", "let", "const", "static"],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "Which method is used to add an element to the end of an array?",
+      "options": ["push()", "pop()", "shift()", "unshift()"],
+      "correctOption": 0,
+      "points": 10
+    },
+    {
+      "question": "What does the typeof operator return for an array?",
+      "options": ["array", "object", "list", "undefined"],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "Which method converts a JSON string into a JavaScript object?",
+      "options": [
+        "JSON.stringify()",
+        "JSON.parse()",
+        "JSON.convert()",
+        "JSON.object()"
+      ],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "Which array method creates a new array by transforming each element?",
+      "options": ["filter()", "reduce()", "map()", "find()"],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "Which operator is used for strict equality comparison?",
+      "options": ["==", "=", "===", "!="],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "What does the spread operator (...) do?",
+      "options": [
+        "Deletes an array",
+        "Expands iterable elements or object properties",
+        "Creates a loop",
+        "Declares a function"
+      ],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "Which function is used to execute code after a specified delay?",
+      "options": ["setInterval()", "setTimeout()", "delay()", "wait()"],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "Which React Hook is used to manage state in a functional component?",
+      "options": ["useEffect", "useRef", "useState", "useMemo"],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "What is JSX in React?",
+      "options": [
+        "A JavaScript testing library",
+        "A syntax extension for JavaScript",
+        "A database",
+        "A CSS framework"
+      ],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "Which React Hook is used to perform side effects?",
+      "options": ["useState", "useReducer", "useEffect", "useContext"],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "What is the purpose of the key prop when rendering lists in React?",
+      "options": [
+        "To style list items",
+        "To uniquely identify elements among siblings",
+        "To create a new component",
+        "To update CSS"
+      ],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "Which method is used to filter array elements based on a condition?",
+      "options": ["map()", "forEach()", "filter()", "reduce()"],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "What does useReducer return?",
+      "options": [
+        "An array containing state and dispatch",
+        "Only the current state",
+        "A function and an object",
+        "A Promise"
+      ],
+      "correctOption": 0,
+      "points": 10
+    }
+  ]
+}
