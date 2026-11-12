@@ -6,7 +6,6 @@ import {
   FiArrowUpRight,
   FiCheckCircle,
   FiCreditCard,
-  FiDollarSign,
   FiPlus,
   FiShield,
   FiTrendingUp,
@@ -25,6 +24,9 @@ const initialState = {
 const depositAmount = 150;
 const withdrawAmount = 50;
 const loanAmount = 5000;
+
+// Currency Formatter
+const formatMoney = (amount) => `৳ ${amount.toLocaleString("en-BD")}`;
 
 // Reducer
 const reducer = (state, action) => {
@@ -65,7 +67,9 @@ const reducer = (state, action) => {
       };
 
     case "payLoan":
-      if (state.balance < state.loan || state.loan === 0) return state;
+      if (state.balance < state.loan || state.loan === 0) {
+        return state;
+      }
 
       return {
         ...state,
@@ -83,14 +87,6 @@ const reducer = (state, action) => {
       throw new Error("Unknown Action");
   }
 };
-
-// Currency Formatter
-const formatMoney = (amount) =>
-  new Intl.NumberFormat("en-BD", {
-    style: "currency",
-    currency: "BDT",
-    maximumFractionDigits: 0,
-  }).format(amount);
 
 // Toast Notification
 const showToast = (icon, title) => {
@@ -111,6 +107,7 @@ export default function App() {
     initialState,
   );
 
+  // Derived Values
   const availableBalance = Math.max(balance - loan, 0);
 
   const canWithdraw = isActive && balance - withdrawAmount >= loan;
@@ -121,8 +118,13 @@ export default function App() {
 
   // Deposit
   const handleDeposit = () => {
+    if (!isActive) return;
+
     dispatch({ type: "deposit" });
-    showToast("success", "৳150 deposited successfully!");
+    showToast(
+      "success",
+      `${formatMoney(depositAmount)} deposited successfully!`,
+    );
   };
 
   // Withdraw
@@ -130,13 +132,18 @@ export default function App() {
     if (!canWithdraw) return;
 
     dispatch({ type: "withdraw" });
-    showToast("success", "৳50 withdrawn successfully!");
+    showToast(
+      "success",
+      `${formatMoney(withdrawAmount)} withdrawn successfully!`,
+    );
   };
 
   // Loan Request
   const handleLoanRequest = () => {
+    if (!isActive || loan > 0) return;
+
     dispatch({ type: "loanRequest" });
-    showToast("success", "Loan of ৳5,000 approved!");
+    showToast("success", `Loan of ${formatMoney(loanAmount)} approved!`);
   };
 
   // Pay Loan
@@ -145,7 +152,7 @@ export default function App() {
       Swal.fire({
         icon: "warning",
         title: "Insufficient Balance",
-        text: "You don't have enough available funds to repay your loan.",
+        text: "You don't have enough funds to repay your loan.",
         confirmButtonColor: "#059669",
       });
       return;
@@ -176,6 +183,8 @@ export default function App() {
 
   // Open Account
   const handleOpenAccount = () => {
+    if (isActive) return;
+
     dispatch({ type: "openAccount" });
     showToast("success", "Your bank account is now active!");
   };
@@ -214,7 +223,7 @@ export default function App() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 lg:px-8">
           <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-lg shadow-emerald-600/20">
-              <FiDollarSign size={24} />
+              <span className="text-2xl font-bold">৳</span>
             </div>
 
             <div>
@@ -287,7 +296,7 @@ export default function App() {
             </div>
 
             <div className="relative z-10 mt-8">
-              <p className="text-sm text-slate-400">Available Balance</p>
+              <p className="text-sm text-slate-400">Account Balance</p>
 
               <h3 className="mt-2 text-4xl font-extrabold tracking-tight sm:text-5xl">
                 {formatMoney(balance)}
@@ -428,7 +437,9 @@ export default function App() {
 
               <div>
                 <h3 className="font-bold text-slate-900">Open Account</h3>
-                <p className="mt-1 text-xs text-slate-500">Start with ৳500</p>
+                <p className="mt-1 text-xs text-slate-500">
+                  Start with {formatMoney(500)}
+                </p>
               </div>
             </button>
 
@@ -445,7 +456,7 @@ export default function App() {
               <div>
                 <h3 className="font-bold text-slate-900">Deposit Funds</h3>
                 <p className="mt-1 text-xs text-slate-500">
-                  Add ৳150 to balance
+                  Add {formatMoney(depositAmount)} to balance
                 </p>
               </div>
             </button>
@@ -462,7 +473,9 @@ export default function App() {
 
               <div>
                 <h3 className="font-bold text-slate-900">Withdraw Funds</h3>
-                <p className="mt-1 text-xs text-slate-500">Withdraw ৳50</p>
+                <p className="mt-1 text-xs text-slate-500">
+                  Withdraw {formatMoney(withdrawAmount)}
+                </p>
               </div>
             </button>
 
@@ -473,12 +486,14 @@ export default function App() {
               className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0"
             >
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600 transition group-hover:bg-amber-500 group-hover:text-white">
-                <FiDollarSign size={24} />
+                <span className="text-xl font-bold">৳</span>
               </div>
 
               <div>
                 <h3 className="font-bold text-slate-900">Request a Loan</h3>
-                <p className="mt-1 text-xs text-slate-500">Get ৳5,000 loan</p>
+                <p className="mt-1 text-xs text-slate-500">
+                  Get {formatMoney(loanAmount)} loan
+                </p>
               </div>
             </button>
 
