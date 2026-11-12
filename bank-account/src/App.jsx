@@ -1,4 +1,42 @@
+import { useReducer } from "react";
+
+const initialState = {
+  balance: 0,
+  loan: 0,
+  isActive: false,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "openAccount":
+      return "";
+
+    case "deposit":
+      return "";
+
+    case "withdraw":
+      return "";
+
+    case "loanRequest":
+      return "";
+
+    case "payLoan":
+      return "";
+
+    case "closeAccount":
+      return "";
+
+    default:
+      throw new Error("Unknown Action");
+  }
+};
+
 export default function App() {
+  const [{ balance, loan, isActive }, dispatch] = useReducer(
+    reducer,
+    initialState,
+  );
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen space-y-5">
       <header>
