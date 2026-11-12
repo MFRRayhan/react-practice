@@ -11,6 +11,8 @@ const withdrawAmount = 50;
 const loanAmount = 5000;
 
 const reducer = (state, action) => {
+  if (!state.isActive && action.type !== "openAccount") return state;
+
   switch (action.type) {
     case "openAccount":
       return {
@@ -26,13 +28,24 @@ const reducer = (state, action) => {
       };
 
     case "withdraw":
-      return { ...state, balance: state.balance - withdrawAmount };
+      return {
+        ...state,
+        balance: state.balance - withdrawAmount,
+      };
 
     case "loanRequest":
-      return { ...state, loan: state.loan + loanAmount };
+      return {
+        ...state,
+        loan: state.loan + loanAmount,
+        balance: state.balance + loanAmount,
+      };
 
     case "payLoan":
-      return { ...state, loan: state.loan - loanAmount };
+      return {
+        ...state,
+        loan: state.loan - loanAmount,
+        balance: state.balance - loanAmount,
+      };
 
     case "closeAccount":
       if (state.loan === 0 && state.balance === 0) return initialState;
@@ -99,7 +112,7 @@ export default function App() {
           onClick={() => {
             dispatch({ type: "payLoan" });
           }}
-          disabled={!isActive}
+          disabled={!isActive || loan === 0}
         >
           Pay Loan
         </button>
@@ -107,9 +120,8 @@ export default function App() {
           className="btn btn-outline"
           onClick={() => {
             dispatch({ type: "closeAccount" });
-            alert("Account Closed");
           }}
-          disabled={!isActive}
+          disabled={!isActive || balance !== 0 || loan !== 0}
         >
           Close Account
         </button>
